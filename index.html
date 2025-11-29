@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4813365942531906"
-     crossorigin="anonymous"></script>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PDF Forge: 10 Free Online PDF Tools - Convert, Merge, Split, Compress, Protect, Sign</title>
@@ -199,15 +198,17 @@
     <!-- Footer -->
     <footer class="bg-gray-800 text-white mt-12">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center">
-            <p class="text-sm text-gray-400">PDF Forge - Free PDF Tools. &copy; 2025. | <a href="#" class="hover:text-blue-400">Privacy</a> | <a href="#" class="hover:text-blue-400">Terms</a></p>
+            <p class="text-sm text-gray-400">PDF Forge - Free PDF Tools. &copy; 2025. | <a href="privacy.html" class="hover:text-blue-400">Privacy Policy</a> | <a href="contact.html" class="hover:text-blue-400">Contact Us</a></p>
         </div>
     </footer>
 
     <script>
         // --- Core Application State & Constants ---
+        const API_ENDPOINT = "[YOUR_CLOUD_FUNCTION_API_ENDPOINT]"; // <--- REPLACE THIS WITH YOUR REAL API URL
+        
         let selectedTool = null;
         let uploadedFiles = [];
-        const maxFiles = 5; // Limit to 5 files for demonstration
+        const maxFiles = 5; 
         const uploadSection = document.getElementById('upload-section');
         const toolTitle = document.getElementById('tool-title');
         const fileInput = document.getElementById('file-input');
@@ -223,11 +224,9 @@
             selectedTool = toolName;
             toolTitle.textContent = `${toolName} PDF Files`;
             
-            // Show the upload section and scroll to it
             uploadSection.style.display = 'block';
             uploadSection.scrollIntoView({ behavior: 'smooth' });
 
-            // Reset files and UI for the new tool
             uploadedFiles = [];
             updateFileList();
             messageElement.classList.add('hidden');
@@ -237,17 +236,13 @@
          * Step 2: File Handling (Drag and Drop / Click)
          */
         function handleFiles(files) {
-            // Convert FileList to Array and filter only PDF files
             const newFiles = Array.from(files).filter(file => file.type === 'application/pdf');
 
-            // Single file tools: Compress, Convert, Protect, Unlock, Rotate, Image Convert, Edit, eSign
             const isSingleFileTool = ['Compress', 'Convert', 'Protect', 'Unlock', 'Rotate', 'Image Convert', 'Edit', 'eSign'].includes(selectedTool);
 
             if (isSingleFileTool && uploadedFiles.length > 0) {
-                 // In single-file mode, replace the file instead of alerting
                  uploadedFiles = newFiles.slice(0, 1);
             } else if (uploadedFiles.length + newFiles.length > maxFiles) {
-                // Multi-file mode (Merge/Split)
                 alert(`You can upload a maximum of ${maxFiles} files for processing.`);
                 return;
             } else {
@@ -264,6 +259,7 @@
                 fileList.innerHTML = '<p class="text-center text-gray-400 italic">No files selected.</p>';
                 processButton.disabled = true;
                 processButton.textContent = `Select file(s) to ${selectedTool}`;
+                processButton.classList.replace('bg-blue-600', 'bg-gray-400');
             } else {
                 uploadedFiles.forEach((file, index) => {
                     const fileSize = (file.size / 1024 / 1024).toFixed(2); // MB
@@ -303,11 +299,149 @@
         dropzone.addEventListener('click', () => fileInput.click());
         fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
 
-        // Drag events
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
             dropzone.addEventListener(eventName, preventDefaults, false);
             document.body.addEventListener(eventName, preventDefaults, false);
         });
 
         ['dragenter', 'dragover'].forEach(eventName => {
-            dropzone.addEventListener(eventName, () => dropzone.classList
+            dropzone.addEventListener(eventName, () => dropzone.classList.add('border-blue-600', 'bg-blue-50'), false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropzone.addEventListener(eventName, () => dropzone.classList.remove('border-blue-600', 'bg-blue-50'), false);
+        });
+
+        dropzone.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFiles(files);
+        }, false);
+
+        function preventDefaults (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        /**
+         * Step 3: REAL API Connection Logic
+         */
+        async function startProcessing() {
+            if (uploadedFiles.length === 0 || !selectedTool) return;
+            if (API_ENDPOINT === "[YOUR_CLOUD_FUNCTION_API_ENDPOINT]") {
+                // If API endpoint is still the placeholder, fall back to mock processing
+                console.warn("API Endpoint is a placeholder. Falling back to mock processing.");
+                return mockProcessing();
+            }
+
+            processButton.disabled = true;
+            processButton.textContent = `Processing ${selectedTool}...`;
+            messageElement.classList.remove('hidden');
+            messageElement.textContent = `Sending files to cloud function for processing...`;
+            processButton.classList.replace('bg-blue-600', 'bg-red-500');
+
+            const formData = new FormData();
+            formData.append('tool', selectedTool);
+            uploadedFiles.forEach((file) => {
+                formData.append('files', file);
+            });
+
+            try {
+                // The actual fetch request to the cloud function
+                const response = await fetch(API_ENDPOINT, {
+                    method: 'POST',
+                    body: formData,
+                    // Note: No 'Content-Type' header needed; FormData sets it automatically (multipart/form-data)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.statusText}`);
+                }
+
+                // Assuming the API returns a Blob for the resulting PDF/file
+                const resultBlob = await response.blob(); 
+                
+                // Success
+                const fileName = `${selectedTool}_${Date.now()}.pdf`;
+                downloadFile(resultBlob, fileName); 
+                
+                // Update UI for success
+                processButton.classList.replace('bg-red-500', 'bg-green-600');
+                processButton.textContent = `Download Complete!`;
+                messageElement.innerHTML = `<span class="text-green-600 font-bold">Success!</span> Your file is ready.`;
+
+            } catch (error) {
+                console.error("Processing failed:", error);
+                
+                // Update UI for failure
+                processButton.classList.replace('bg-red-500', 'bg-red-700');
+                processButton.textContent = `Error! Try Again.`;
+                messageElement.innerHTML = `<span class="text-red-600 font-bold">Error!</span> Processing failed. Please try again or contact support.`;
+            } finally {
+                // Reset to allow new processing attempt
+                processButton.disabled = false;
+                processButton.onclick = () => {
+                    uploadedFiles = [];
+                    updateFileList();
+                    messageElement.classList.add('hidden');
+                    processButton.textContent = `Start Processing`;
+                    processButton.onclick = startProcessing;
+                };
+            }
+        }
+        
+        /**
+         * Fallback Mock Processing (if API key is missing)
+         */
+        function mockProcessing() {
+             processButton.disabled = true;
+            processButton.textContent = `Processing ${selectedTool}...`;
+            messageElement.classList.remove('hidden');
+            messageElement.textContent = `(Mock Operation - Connect your cloud API to enable real processing) ${selectedTool} is underway.`;
+            processButton.classList.replace('bg-blue-600', 'bg-red-500');
+
+            setTimeout(() => {
+                processButton.classList.replace('bg-red-500', 'bg-green-600');
+                processButton.textContent = `Download Mock File!`;
+                
+                messageElement.innerHTML = `
+                    <span class="text-green-600 font-bold">Success!</span> Your file is ready.
+                    <div class="mt-2 text-sm text-gray-500">Processing simulated: ${selectedTool} complete.</div>
+                `;
+                processButton.disabled = false;
+                processButton.onclick = mockDownload;
+            }, 3000);
+        }
+
+        function mockDownload() {
+            messageElement.innerHTML = `<span class="text-blue-600 font-bold">Downloaded!</span> File saved successfully.`;
+            processButton.classList.replace('bg-green-600', 'bg-blue-600');
+            processButton.textContent = `Process Another File`;
+            processButton.onclick = () => {
+                uploadedFiles = [];
+                updateFileList();
+                messageElement.classList.add('hidden');
+                processButton.textContent = `Start Processing`;
+                processButton.onclick = startProcessing;
+            };
+        }
+
+        /**
+         * Helper function to trigger browser download
+         */
+        function downloadFile(blob, fileName) {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+
+    </script>
+</body>
+</html>
+
