@@ -8,8 +8,6 @@
     <title>PDF Forge: 12 Free Online PDF Tools - The Full Suite for Document Management</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <!-- LIBRARY ADDED: PDF-LIB.JS for client-side manipulation -->
-    <script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -288,4 +286,10 @@
                      toolOptionsDiv.classList.remove('hidden');
                     toolOptionsDiv.innerHTML = `
                         <label for="password-input" class="block text-sm font-medium text-gray-700">Enter Current Password to Unlock:</label>
-                        <input type="password" id="password-input" placeholder="Enter password" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm 
+                        <input type="password" id="password-input" placeholder="Enter password" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-2">
+                    `;
+                    break;
+                case 'Remove':
+                case 'Extract':
+                case 'Reorder':
+  
