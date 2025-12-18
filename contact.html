@@ -1,26 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="google-adsense-account" content="ca-pub-4813365942531906">
     <meta charset="UTF-8">
-    <title>Contact Us - CalcForge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - CalcForge Support</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
-<body class="bg-slate-50 p-8 font-['Plus_Jakarta_Sans']">
-    <div class="max-w-2xl mx-auto bg-white p-12 rounded-3xl shadow-sm border text-center">
-        <h1 class="text-3xl font-black mb-6">Support Center</h1>
-        <p class="text-slate-600 mb-8 leading-relaxed">CalcForge aims to be the most accurate utility tool suite on the web. If you have a question about our math formulas or want to suggest a new tool, please reach out.</p>
-        
-        <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100 inline-block">
-            <p class="text-xs font-bold text-slate-400 uppercase mb-2">Technical Support</p>
-            <p class="text-xl font-bold text-slate-900">support@calcforge-app.com</p>
+<body class="bg-slate-50 font-['Plus_Jakarta_Sans'] text-slate-900">
+
+    <nav class="bg-white border-b py-4 px-6 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-xl font-black tracking-tighter">CalcForge</a>
+            <a href="index.html" class="text-xs font-bold text-slate-400 uppercase">Back to Tools</a>
+        </div>
+    </nav>
+
+    <main class="max-w-xl mx-auto px-6 py-16">
+        <div class="text-center mb-10">
+            <h1 class="text-4xl font-black mb-4">Get in Touch</h1>
+            <p class="text-slate-500">Have a question or suggestion? Fill out the form below and our team will get back to you shortly.</p>
         </div>
 
-        <p class="mt-8 text-xs text-slate-400">Note: We do not provide financial or medical advice. Our tools are for informational purposes only.</p>
+        <!-- 
+            HOW THIS WORKS: 
+            Replace 'YOUR_EMAIL@GMAIL.COM' with your actual email address below.
+            When someone hits send, FormSubmit sends the message to you.
+        -->
+        <form action="https://formsubmit.co/raisingemperor@gmail.com" method="POST" class="bg-white p-8 rounded-[2.5rem] shadow-xl border border-slate-100 space-y-6">
+            
+            <!-- Anti-Spam (Hidden) -->
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_subject" value="New Message from CalcForge!">
+            
+            <div>
+                <label class="block text-[10px] font-black text-slate-400 uppercase mb-2 ml-1">Your Name</label>
+                <input type="text" name="name" required class="w-full p-4 bg-slate-50 border-2 border-transparent focus:border-slate-900 rounded-2xl outline-none font-bold transition">
+            </div>
 
-        <a href="index.html" class="inline-block mt-12 text-slate-900 font-bold underline">Back to Home</a>
-    </div>
+            <div>
+                <label class="block text-[10px] font-black text-slate-400 uppercase mb-2 ml-1">Email Address</label>
+                <input type="email" name="email" required class="w-full p-4 bg-slate-50 border-2 border-transparent focus:border-slate-900 rounded-2xl outline-none font-bold transition">
+            </div>
+
+            <div>
+                <label class="block text-[10px] font-black text-slate-400 uppercase mb-2 ml-1">Message</label>
+                <textarea name="message" rows="5" required class="w-full p-4 bg-slate-50 border-2 border-transparent focus:border-slate-900 rounded-2xl outline-none font-bold transition" placeholder="How can we help?"></textarea>
+            </div>
+
+            <button type="submit" class="w-full bg-slate-900 text-white font-black py-4 rounded-2xl hover:bg-slate-800 transition shadow-lg shadow-slate-200 uppercase text-xs tracking-widest">
+                Send Message
+            </button>
+        </form>
+
+        <div class="mt-12 text-center">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Direct Support</p>
+            <p class="font-bold text-slate-700">support@calcforge-app.com</p>
+        </div>
+    </main>
+
+    <footer class="py-12 text-center text-[10px] font-bold text-slate-300 uppercase tracking-widest">
+        &copy; 2025 CalcForge Precision Utility
+    </footer>
+
 </body>
 </html>
 
