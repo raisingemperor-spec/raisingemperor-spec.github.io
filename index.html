@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- Cache Busting Meta Tags -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
     
-    <title>CalcForge - Professional Utility Suite</title>
+    <title>CalcForge - Professional Financial & Health Suite</title>
     
-    <!-- Tailwind CSS for modern design -->
+    <!-- 🛑 PLACE YOUR MAIN ADSENSE SCRIPT TAG BELOW THIS LINE 🛑 -->
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     
@@ -21,7 +20,8 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .tab-btn.active { background-color: #0f172a; color: #ffffff; border-color: #0f172a; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        input { font-size: 16px !important; } /* Stops iOS zoom */
+        input { font-size: 16px !important; } 
+        .ad-slot { background-color: #f1f5f9; border: 2px dashed #cbd5e1; border-radius: 1rem; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; text-align: center; padding: 10px; }
     </style>
 </head>
 <body class="text-slate-900 min-h-screen flex flex-col">
@@ -42,9 +42,12 @@
 
     <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
         
-        <!-- AdSense Slot (Top) -->
-        <div class="bg-slate-100 border-2 border-dashed border-slate-200 h-24 mb-8 rounded-2xl flex items-center justify-center text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-            AdSense Top Banner Area
+        <!-- ADSENSE SLOT 1: TOP BANNER -->
+        <div class="ad-slot h-24 mb-8">
+            <div>
+                <p>Google AdSense: Top Leaderboard</p>
+                <p class="text-[8px] opacity-60 mt-1">Responsive Display Ad Unit</p>
+            </div>
         </div>
 
         <!-- STABLE TAB SELECTOR -->
@@ -60,16 +63,15 @@
         </div>
 
         <!-- TOOL PANES -->
-        <div class="bg-white rounded-3xl p-6 shadow-xl border border-slate-100 min-h-[400px]">
+        <div class="bg-white rounded-3xl p-6 shadow-xl border border-slate-100">
             
-            <!-- Loan -->
             <div id="pane-loan" class="pane active">
                 <h3 class="text-xl font-black mb-6">Loan EMI Calculator</h3>
                 <div class="space-y-4">
-                    <input type="number" id="l-amt" value="50000" oninput="calcLoan()" class="w-full p-4 bg-slate-50 rounded-xl border-2 border-transparent focus:border-slate-900 outline-none font-bold" placeholder="Loan Amount">
+                    <input type="number" id="l-amt" value="50000" oninput="calcLoan()" class="w-full p-4 bg-slate-50 rounded-xl border-2 border-transparent focus:border-slate-900 outline-none font-bold">
                     <div class="grid grid-cols-2 gap-4">
-                        <input type="number" id="l-int" value="7.5" oninput="calcLoan()" class="w-full p-4 bg-slate-50 rounded-xl border-2 border-transparent focus:border-slate-900 outline-none font-bold" placeholder="Rate %">
-                        <input type="number" id="l-dur" value="5" oninput="calcLoan()" class="w-full p-4 bg-slate-50 rounded-xl border-2 border-transparent focus:border-slate-900 outline-none font-bold" placeholder="Years">
+                        <input type="number" id="l-int" value="7.5" oninput="calcLoan()" class="w-full p-4 bg-slate-50 rounded-xl border-2 border-transparent focus:border-slate-900 outline-none font-bold">
+                        <input type="number" id="l-dur" value="5" oninput="calcLoan()" class="w-full p-4 bg-slate-50 rounded-xl border-2 border-transparent focus:border-slate-900 outline-none font-bold">
                     </div>
                     <div class="bg-slate-900 text-white p-8 rounded-2xl text-center mt-6">
                         <p class="text-[10px] text-slate-400 font-bold uppercase mb-1">Monthly EMI</p>
@@ -78,12 +80,11 @@
                 </div>
             </div>
 
-            <!-- BMI -->
             <div id="pane-bmi" class="pane">
                 <h3 class="text-xl font-black mb-6 text-center">BMI Health Analyzer</h3>
                 <div class="max-w-xs mx-auto space-y-4">
-                    <input type="number" id="b-w" value="70" oninput="calcBMI()" class="w-full p-4 bg-slate-50 rounded-xl border text-center font-bold" placeholder="Weight (kg)">
-                    <input type="number" id="b-h" value="175" oninput="calcBMI()" class="w-full p-4 bg-slate-50 rounded-xl border text-center font-bold" placeholder="Height (cm)">
+                    <input type="number" id="b-w" value="70" oninput="calcBMI()" class="w-full p-4 bg-slate-50 rounded-xl border text-center font-bold">
+                    <input type="number" id="b-h" value="175" oninput="calcBMI()" class="w-full p-4 bg-slate-50 rounded-xl border text-center font-bold">
                     <div id="b-box" class="bg-slate-50 border-4 border-slate-900 rounded-2xl p-6 text-center mt-4">
                         <div id="b-res" class="text-5xl font-black">22.9</div>
                         <div id="b-cat" class="text-[10px] font-bold uppercase mt-2">Normal Weight</div>
@@ -91,59 +92,53 @@
                 </div>
             </div>
 
-            <!-- SIP -->
             <div id="pane-sip" class="pane">
                 <h3 class="text-xl font-black mb-6">SIP Investment Planner</h3>
                 <div class="space-y-4">
-                    <input type="number" id="s-amt" value="500" oninput="calcSIP()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold" placeholder="Monthly SIP ($)">
+                    <input type="number" id="s-amt" value="500" oninput="calcSIP()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold">
                     <div class="grid grid-cols-2 gap-4">
-                        <input type="number" id="s-ret" value="12" oninput="calcSIP()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold" placeholder="Return %">
-                        <input type="number" id="s-yrs" value="10" oninput="calcSIP()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold" placeholder="Years">
+                        <input type="number" id="s-ret" value="12" oninput="calcSIP()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold">
+                        <input type="number" id="s-yrs" value="10" oninput="calcSIP()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold">
                     </div>
                     <div class="bg-slate-900 text-white p-8 rounded-2xl text-center">
-                        <p id="s-res" class="text-4xl font-black">$116,169</p>
+                        <div id="s-res" class="text-4xl font-black">$116,169</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Discount -->
             <div id="pane-disc" class="pane">
                 <h3 class="text-xl font-black mb-6 text-center">Discount Calculator</h3>
                 <div class="max-w-xs mx-auto space-y-4">
-                    <input type="number" id="d-prc" value="100" oninput="calcDisc()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold text-center" placeholder="Original Price">
-                    <input type="number" id="d-pct" value="20" oninput="calcDisc()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold text-center" placeholder="Discount %">
+                    <input type="number" id="d-prc" value="100" oninput="calcDisc()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold text-center">
+                    <input type="number" id="d-pct" value="20" oninput="calcDisc()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold text-center">
                     <div class="bg-slate-900 text-white p-6 rounded-2xl text-center">
-                        <p class="text-[10px] text-slate-400 font-bold uppercase">Final Price</p>
                         <div id="d-res" class="text-3xl font-black">$80.00</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Fuel -->
             <div id="pane-fuel" class="pane">
                 <h3 class="text-xl font-black mb-6">Fuel Cost Calculator</h3>
                 <div class="space-y-4">
-                    <input type="number" id="f-dst" value="300" oninput="calcFuel()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold" placeholder="Distance (km)">
-                    <input type="number" id="f-eff" value="15" oninput="calcFuel()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold" placeholder="Mileage (km/L)">
-                    <input type="number" id="f-prc" value="1.5" oninput="calcFuel()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold" placeholder="Price/Liter">
+                    <input type="number" id="f-dst" value="300" oninput="calcFuel()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold">
+                    <input type="number" id="f-eff" value="15" oninput="calcFuel()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold">
+                    <input type="number" id="f-prc" value="1.5" oninput="calcFuel()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold">
                     <div id="f-res" class="text-center text-4xl font-black p-4">$30.00</div>
                 </div>
             </div>
 
-            <!-- Tip -->
             <div id="pane-tip" class="pane">
                 <h3 class="text-xl font-black mb-6">Tip & Split</h3>
                 <div class="space-y-4">
-                    <input type="number" id="t-bil" value="120" oninput="calcTip()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold" placeholder="Total Bill">
+                    <input type="number" id="t-bil" value="120" oninput="calcTip()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold">
                     <div class="grid grid-cols-2 gap-4">
-                        <input type="number" id="t-pct" value="15" oninput="calcTip()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold" placeholder="Tip %">
-                        <input type="number" id="t-ppl" value="4" oninput="calcTip()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold" placeholder="People">
+                        <input type="number" id="t-pct" value="15" oninput="calcTip()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold">
+                        <input type="number" id="t-ppl" value="4" oninput="calcTip()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold">
                     </div>
                     <div id="t-res" class="text-center text-4xl font-black p-4">$34.50</div>
                 </div>
             </div>
 
-            <!-- Age -->
             <div id="pane-age" class="pane">
                 <h3 class="text-xl font-black mb-6 text-center">Age Finder</h3>
                 <div class="max-w-xs mx-auto space-y-4">
@@ -152,148 +147,115 @@
                 </div>
             </div>
 
-            <!-- Compound -->
             <div id="pane-comp" class="pane">
                 <h3 class="text-xl font-black mb-6">Compound Interest</h3>
                 <div class="space-y-4">
-                    <input type="number" id="c-amt" value="10000" oninput="calcComp()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold" placeholder="Principal">
-                    <input type="number" id="c-int" value="8" oninput="calcComp()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold" placeholder="Rate %">
-                    <input type="number" id="c-yrs" value="10" oninput="calcComp()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold" placeholder="Years">
+                    <input type="number" id="c-amt" value="10000" oninput="calcComp()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold">
+                    <input type="number" id="c-int" value="8" oninput="calcComp()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold">
+                    <input type="number" id="c-yrs" value="10" oninput="calcComp()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold">
                     <div id="c-res" class="text-center text-4xl font-black p-4">$21,589</div>
                 </div>
             </div>
 
         </div>
 
+        <!-- ADSENSE SLOT 2: IN-FEED (MIDDLE) -->
+        <div class="ad-slot h-20 my-10">
+            <p>Google AdSense: In-Feed Tool Ad</p>
+        </div>
+
         <!-- 🚀 ADSENSE CONTENT HUB 🚀 -->
-        <article class="mt-20 prose prose-slate max-w-none border-t pt-16">
-            <h2 class="text-3xl font-black mb-8 leading-tight">Mastering Personal Finance: A Deep Dive Guide</h2>
-            <p class="text-slate-500 leading-relaxed mb-6">In today’s fast-paced digital economy, having the ability to calculate and project your financial health is a vital skill. CalcForge was developed to provide users with a professional, server-grade calculation suite that respects user privacy and operates with zero data tracking. Below, we explore the science behind our most used tools.</p>
+        <article class="mt-10 prose prose-slate max-w-none border-t pt-10">
+            <h2 class="text-3xl font-black mb-6 leading-tight">Mastering Your Wealth and Wellness Hub</h2>
+            <p class="text-slate-500 leading-relaxed mb-6">Financial literacy is the foundation of a secure future. CalcForge provides the professional mathematical tools necessary to calculate loan amortizations, projected investment wealth, and physiological health benchmarks like BMI. All calculations are performed instantly in your browser to protect your privacy.</p>
             
-            <h3 class="text-xl font-bold mt-10 mb-4">1. Understanding Loan Amortization</h3>
-            <p class="text-slate-500 mb-6">When you borrow money, you are essentially "renting" capital. The monthly EMI (Equated Monthly Installment) is a fixed payment that covers both the interest and the principal repayment. By using our **Loan EMI Calculator**, you can see how even a 0.5% change in interest rates can save you thousands of dollars over a 30-year period.</p>
+            <h3 class="text-xl font-bold mt-10 mb-4 text-slate-900">1. Understanding Loan Interest Rates</h3>
+            <p class="text-slate-500 mb-6">When you take a loan, understanding your EMI (Equated Monthly Installment) is crucial for budgeting. A lower interest rate or shorter duration can save you thousands in total interest over the life of a loan. Use our tool to find your optimal repayment strategy.</p>
 
-            <h3 class="text-xl font-bold mt-10 mb-4">2. The Magic of Compounding</h3>
-            <p class="text-slate-500 mb-6">Albert Einstein famously called compound interest the "eighth wonder of the world." Our **SIP and Compounding Tools** are designed to help you visualize why starting early is the most important factor in wealth building. A Systematic Investment Plan (SIP) allows you to benefit from Rupee Cost Averaging, ensuring that you build wealth steadily regardless of market fluctuations.</p>
+            <!-- ADSENSE SLOT 3: ARTICLE IN-TEXT -->
+            <div class="ad-slot h-24 my-8">
+                <p>Google AdSense: Article Inline Ad</p>
+            </div>
 
-            <h3 class="text-xl font-bold mt-10 mb-4">3. Health Metrics & BMI</h3>
-            <p class="text-slate-500 mb-6">Your body is your primary asset. The **Body Mass Index (BMI)** is a screening tool used globally by health professionals to categorize weight based on height. While it doesn't measure body fat directly, maintaining a healthy BMI (18.5 - 24.9) is statistically linked to lower risks of chronic cardiovascular diseases and metabolic issues.</p>
+            <h3 class="text-xl font-bold mt-10 mb-4 text-slate-900">2. The Compound Interest Factor</h3>
+            <p class="text-slate-500 mb-6">Compound interest is the "eighth wonder of the world." By consistently investing even small amounts through a Systematic Investment Plan (SIP), you can harness the power of time to build significant long-term wealth.</p>
         </article>
 
-        <!-- DEBUG & RESET (To fix freezing) -->
-        <div class="mt-20 border-t pt-8 text-center">
-            <p class="text-[8px] font-bold text-slate-300 uppercase tracking-widest mb-4">System Version 5.0.1 • All Engines Active</p>
-            <button onclick="location.reload(true)" class="bg-slate-100 text-slate-400 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-slate-200 transition">Force Clear Cache & Refresh</button>
+        <!-- DEBUG & RESET -->
+        <div class="mt-12 border-t pt-8 text-center">
+            <button onclick="location.reload(true)" class="bg-slate-100 text-slate-400 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-slate-200 transition">Refresh App</button>
+        </div>
+
+        <!-- ADSENSE SLOT 4: BOTTOM BANNER -->
+        <div class="ad-slot h-24 mt-12 mb-8">
+            <p>Google AdSense: Bottom Anchor Banner</p>
         </div>
 
     </main>
 
-    <footer class="bg-white border-t py-12 text-center">
+    <footer class="bg-white border-t py-10 text-center">
         <p class="text-slate-900 font-black text-xl mb-1">CalcForge</p>
-        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.4em]">Universal Precision Portal</p>
+        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.4em]">Precision Utility Portal</p>
     </footer>
 
     <script>
-        // ENGINE: TAB SWITCHER
         function showPane(id) {
-            // Hide all
             var panes = document.getElementsByClassName('pane');
             for (var i = 0; i < panes.length; i++) { panes[i].classList.remove('active'); }
-            
-            // Deactivate buttons
             var btns = document.getElementsByClassName('tab-btn');
-            for (var j = 0; j < btns.length; j++) { 
-                btns[j].classList.remove('active'); 
-                btns[j].classList.add('text-slate-400');
-            }
-            
-            // Show selected
+            for (var j = 0; j < btns.length; j++) { btns[j].classList.remove('active'); btns[j].classList.add('text-slate-400'); }
             document.getElementById('pane-' + id).classList.add('active');
-            var activeBtn = document.getElementById('tab-' + id);
-            activeBtn.classList.add('active');
-            activeBtn.classList.remove('text-slate-400');
-            
-            // Run math for that tab
-            window['calc' + id.charAt(0).toUpperCase() + id.slice(1)]();
+            var b = document.getElementById('tab-' + id);
+            b.classList.add('active'); b.classList.remove('text-slate-400');
+            if(window['calc'+id.charAt(0).toUpperCase()+id.slice(1)]) window['calc'+id.charAt(0).toUpperCase()+id.slice(1)]();
         }
 
-        // MATH ENGINES
         function calcLoan() {
-            var p = parseFloat(document.getElementById('l-amt').value) || 0;
-            var r = (parseFloat(document.getElementById('l-int').value) || 0) / 12 / 100;
-            var n = (parseFloat(document.getElementById('l-dur').value) || 0) * 12;
-            if (p > 0 && r > 0 && n > 0) {
-                var emi = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-                document.getElementById('l-res').innerText = "$" + emi.toLocaleString(undefined, {maximumFractionDigits: 2});
+            var p = parseFloat(document.getElementById('l-amt').value)||0, r = (parseFloat(document.getElementById('l-int').value)||0)/12/100, n = (parseFloat(document.getElementById('l-dur').value)||0)*12;
+            if (p>0 && r>0 && n>0) {
+                var e = (p*r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+                document.getElementById('l-res').innerText = "$"+e.toLocaleString(undefined,{maximumFractionDigits:2});
             }
         }
-
         function calcBMI() {
-            var w = parseFloat(document.getElementById('b-w').value) || 0;
-            var h = (parseFloat(document.getElementById('b-h').value) || 0) / 100;
-            if (w > 0 && h > 0) {
-                var bmi = (w / (h * h)).toFixed(1);
-                document.getElementById('b-res').innerText = bmi;
-                var cat = "Normal", col = "border-slate-900";
-                if(bmi < 18.5) { cat = "Underweight"; col = "border-yellow-400"; }
-                else if(bmi >= 25 && bmi < 29.9) { cat = "Overweight"; col = "border-orange-400"; }
-                else if(bmi >= 30) { cat = "Obese"; col = "border-red-500"; }
-                document.getElementById('b-cat').innerText = cat;
-                document.getElementById('b-box').className = "bg-slate-50 border-4 rounded-2xl p-6 text-center mt-4 " + col;
+            var w = parseFloat(document.getElementById('b-w').value)||0, h = (parseFloat(document.getElementById('b-h').value)||0)/100;
+            if (w>0 && h>0) {
+                var bmi = (w/(h*h)).toFixed(1); document.getElementById('b-res').innerText = bmi;
+                var c = "Normal", cl = "border-slate-900";
+                if(bmi < 18.5) { c = "Underweight"; cl = "border-yellow-400"; }
+                else if(bmi >= 25 && bmi < 29.9) { c = "Overweight"; cl = "border-orange-400"; }
+                else if(bmi >= 30) { c = "Obese"; cl = "border-red-500"; }
+                document.getElementById('b-cat').innerText = c;
+                document.getElementById('b-box').className = "bg-slate-50 border-4 rounded-2xl p-6 text-center mt-4 "+cl;
             }
         }
-
         function calcSIP() {
-            var m = parseFloat(document.getElementById('s-amt').value) || 0;
-            var r = (parseFloat(document.getElementById('s-ret').value) || 0) / 12 / 100;
-            var n = (parseFloat(document.getElementById('s-yrs').value) || 0) * 12;
-            if (m > 0 && r > 0 && n > 0) {
-                var tot = m * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
-                document.getElementById('s-res').innerText = "$" + Math.round(tot).toLocaleString();
-            }
+            var m = parseFloat(document.getElementById('s-amt').value)||0, r = (parseFloat(document.getElementById('s-ret').value)||0)/12/100, n = (parseFloat(document.getElementById('s-yrs').value)||0)*12;
+            if (m>0 && r>0 && n>0) document.getElementById('s-res').innerText = "$"+Math.round(m*((Math.pow(1+r,n)-1)/r)*(1+r)).toLocaleString();
         }
-
         function calcDisc() {
-            var p = parseFloat(document.getElementById('d-prc').value) || 0;
-            var s = parseFloat(document.getElementById('d-pct').value) || 0;
-            document.getElementById('d-res').innerText = "$" + (p - (p * s / 100)).toFixed(2);
+            var p = parseFloat(document.getElementById('d-prc').value)||0, s = parseFloat(document.getElementById('d-pct').value)||0;
+            document.getElementById('d-res').innerText = "$"+(p-(p*s/100)).toFixed(2);
         }
-
         function calcFuel() {
-            var d = parseFloat(document.getElementById('f-dst').value) || 0;
-            var e = parseFloat(document.getElementById('f-eff').value) || 0;
-            var p = parseFloat(document.getElementById('f-prc').value) || 0;
-            if (e > 0) document.getElementById('f-res').innerText = "$" + ((d / e) * p).toFixed(2);
+            var d = parseFloat(document.getElementById('f-dst').value)||0, e = parseFloat(document.getElementById('f-eff').value)||0, p = parseFloat(document.getElementById('f-prc').value)||0;
+            if (e>0) document.getElementById('f-res').innerText = "$"+((d/e)*p).toFixed(2);
         }
-
         function calcTip() {
-            var b = parseFloat(document.getElementById('t-bil').value) || 0;
-            var p = parseFloat(document.getElementById('t-pct').value) || 0;
-            var n = parseFloat(document.getElementById('t-ppl').value) || 1;
-            document.getElementById('t-res').innerText = "$" + ((b + (b * p / 100)) / n).toFixed(2);
+            var b = parseFloat(document.getElementById('t-bil').value)||0, p = parseFloat(document.getElementById('t-pct').value)||0, n = parseFloat(document.getElementById('t-ppl').value)||1;
+            document.getElementById('t-res').innerText = "$"+((b+(b*p/100))/n).toFixed(2);
         }
-
         function calcAge() {
-            var d = document.getElementById('a-dob').value;
-            if(!d) return;
-            var dob = new Date(d);
-            var age = Math.floor((new Date() - dob) / (365.25 * 24 * 60 * 60 * 1000));
-            document.getElementById('a-res').innerText = age + " Years Old";
+            var d = document.getElementById('a-dob').value; if(!d) return;
+            var yrs = Math.floor((new Date()-new Date(d))/(365.25*24*60*60*1000));
+            document.getElementById('a-res').innerText = yrs + " Years Old";
         }
-
         function calcComp() {
-            var p = parseFloat(document.getElementById('c-amt').value) || 0;
-            var r = (parseFloat(document.getElementById('c-int').value) || 0) / 100;
-            var n = parseFloat(document.getElementById('c-yrs').value) || 0;
-            document.getElementById('c-res').innerText = "$" + Math.round(p * Math.pow((1 + r), n)).toLocaleString();
+            var p = parseFloat(document.getElementById('c-amt').value)||0, r = (parseFloat(document.getElementById('c-int').value)||0)/100, n = parseFloat(document.getElementById('c-yrs').value)||0;
+            document.getElementById('c-res').innerText = "$"+Math.round(p*Math.pow((1+r),n)).toLocaleString();
         }
-
-        // AUTO START
-        window.onload = function() {
-            calcLoan(); calcBMI(); calcSIP(); calcDisc(); calcFuel(); calcTip(); calcComp();
-        };
+        window.onload = function() { calcLoan(); calcBMI(); calcSIP(); calcDisc(); calcFuel(); calcTip(); calcComp(); };
     </script>
 </body>
 </html>
 
-    
