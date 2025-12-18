@@ -2,254 +2,236 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CalcForge - Professional Utility Calculators</title>
-    <!-- We use the full Tailwind CDN link to ensure reliability -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CalcForge - Instant Professional Calculators</title>
+    <!-- Optimized Tailwind Loading -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; -webkit-tap-highlight-color: transparent; }
         .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.2s ease-in-out; }
+        .tab-content.show { display: block; animation: fadeIn 0.2s ease-in; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .active-tab { border-bottom: 4px solid #0f172a; color: #0f172a; background-color: #f1f5f9; }
-        /* Hide arrows on number inputs */
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        .tab-btn.active { background-color: #0f172a; color: white; border-color: #0f172a; }
+        input { font-size: 16px !important; } /* Prevents iOS zoom on focus */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="text-slate-900 min-h-screen flex flex-col">
+<body class="text-slate-900 overflow-x-hidden">
 
-    <!-- Navigation -->
-    <nav class="bg-white border-b sticky top-0 z-50">
-        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+    <!-- Simple Nav -->
+    <nav class="bg-white border-b py-4 px-6 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-2">
-                <div class="bg-slate-900 p-2 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                    </svg>
+                <div class="bg-slate-900 p-1.5 rounded-lg">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
                 </div>
-                <span class="text-2xl font-black text-slate-900">CalcForge</span>
+                <span class="text-xl font-extrabold tracking-tighter">CalcForge</span>
             </div>
-            <div class="space-x-4 text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest">
-                <a href="privacy.html" class="hover:text-slate-900">Privacy</a>
-                <a href="contact.html" class="hover:text-slate-900">Contact</a>
+            <div class="flex space-x-4 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                <a href="privacy.html">Privacy</a>
+                <a href="contact.html">Contact</a>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full">
-        <!-- Top Banner Placeholder -->
-        <div class="bg-slate-100 border-2 border-dashed border-slate-200 h-24 mb-10 rounded-xl flex items-center justify-center text-slate-400 text-[10px] font-bold uppercase tracking-widest">
-            AdSense Top Placement
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <!-- Top Ad Placeholder -->
+        <div class="bg-slate-100 border-2 border-dashed border-slate-200 h-20 rounded-2xl flex items-center justify-center text-[10px] font-bold text-slate-400 uppercase mb-8">
+            AdSense Top Banner
         </div>
 
-        <!-- Tool Selection Tabs -->
-        <div class="bg-white rounded-2xl shadow-sm border p-1 flex overflow-x-auto mb-8 no-scrollbar touch-pan-x">
-            <button onclick="openTab(event, 'loan')" class="tab-link active-tab flex-1 px-4 py-4 whitespace-nowrap font-bold text-xs rounded-xl transition-all">LOAN EMI</button>
-            <button onclick="openTab(event, 'bmi')" class="tab-link flex-1 px-4 py-4 whitespace-nowrap font-bold text-xs rounded-xl transition-all">BMI HEALTH</button>
-            <button onclick="openTab(event, 'sip')" class="tab-link flex-1 px-4 py-4 whitespace-nowrap font-bold text-xs rounded-xl transition-all">SIP WEALTH</button>
-            <button onclick="openTab(event, 'age')" class="tab-link flex-1 px-4 py-4 whitespace-nowrap font-bold text-xs rounded-xl transition-all">AGE FINDER</button>
+        <!-- STABLE TAB SYSTEM -->
+        <div class="flex space-x-2 overflow-x-auto no-scrollbar pb-4 mb-6">
+            <button id="btn-loan" onclick="switchTab('loan')" class="tab-btn active px-6 py-3 rounded-xl border-2 font-bold text-xs whitespace-nowrap transition-all">LOAN EMI</button>
+            <button id="btn-bmi" onclick="switchTab('bmi')" class="tab-btn px-6 py-3 rounded-xl border-2 font-bold text-xs whitespace-nowrap transition-all text-slate-500">BMI HEALTH</button>
+            <button id="btn-sip" onclick="switchTab('sip')" class="tab-btn px-6 py-3 rounded-xl border-2 font-bold text-xs whitespace-nowrap transition-all text-slate-500">SIP WEALTH</button>
+            <button id="btn-age" onclick="switchTab('age')" class="tab-btn px-6 py-3 rounded-xl border-2 font-bold text-xs whitespace-nowrap transition-all text-slate-500">AGE FINDER</button>
         </div>
 
-        <!-- TOOL 1: LOAN EMI -->
-        <div id="loan" class="tab-content active bg-white rounded-3xl shadow-xl border border-slate-100 p-6 sm:p-10">
-            <h3 class="text-2xl font-bold mb-8">Loan EMI Calculator</h3>
-            <div class="grid md:grid-cols-2 gap-10">
-                <div class="space-y-6">
-                    <div>
-                        <label class="block text-[10px] font-black text-slate-400 uppercase mb-2">Loan Amount ($)</label>
-                        <input type="number" id="l-amount" value="50000" oninput="calcLoan()" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-slate-900 outline-none text-xl font-bold">
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-[10px] font-black text-slate-400 uppercase mb-2">Interest %</label>
-                            <input type="number" id="l-rate" value="7.5" step="0.1" oninput="calcLoan()" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-slate-900 outline-none text-xl font-bold">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-black text-slate-400 uppercase mb-2">Years</label>
-                            <input type="number" id="l-years" value="5" oninput="calcLoan()" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-slate-900 outline-none text-xl font-bold">
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-slate-900 rounded-3xl p-8 text-white flex flex-col justify-center text-center">
-                    <p class="text-slate-400 text-[10px] font-bold uppercase mb-2">Monthly EMI</p>
-                    <p id="l-result" class="text-5xl font-black">$1,001.90</p>
-                    <p class="text-slate-500 text-[10px] mt-6 uppercase font-bold tracking-widest">Total Interest: <span id="l-interest" class="text-white">$10,114</span></p>
-                </div>
-            </div>
-        </div>
-
-        <!-- TOOL 2: BMI -->
-        <div id="bmi" class="tab-content bg-white rounded-3xl shadow-xl border border-slate-100 p-6 sm:p-10">
-            <h3 class="text-2xl font-bold mb-8">BMI Health Analyzer</h3>
-            <div class="grid md:grid-cols-2 gap-10">
-                <div class="space-y-6">
-                    <div>
-                        <label class="block text-[10px] font-black text-slate-400 uppercase mb-2">Weight (kg)</label>
-                        <input type="number" id="b-weight" value="70" oninput="calcBMI()" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-slate-900 outline-none text-xl font-bold">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-black text-slate-400 uppercase mb-2">Height (cm)</label>
-                        <input type="number" id="b-height" value="175" oninput="calcBMI()" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-slate-900 outline-none text-xl font-bold">
-                    </div>
-                </div>
-                <div id="b-card" class="bg-white border-4 border-slate-900 rounded-3xl p-8 flex flex-col justify-center text-center">
-                    <p class="text-slate-500 text-[10px] font-bold uppercase mb-2">BMI Score</p>
-                    <p id="b-result" class="text-6xl font-black">22.9</p>
-                    <p id="b-status" class="mt-4 font-black uppercase text-xs tracking-widest">Normal Weight</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- TOOL 3: SIP -->
-        <div id="sip" class="tab-content bg-white rounded-3xl shadow-xl border border-slate-100 p-6 sm:p-10">
-            <h3 class="text-2xl font-bold mb-8">SIP Investment Planner</h3>
-            <div class="grid md:grid-cols-2 gap-10">
-                <div class="space-y-6">
-                    <div>
-                        <label class="block text-[10px] font-black text-slate-400 uppercase mb-2">Monthly Deposit ($)</label>
-                        <input type="number" id="s-amount" value="500" oninput="calcSIP()" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-slate-900 outline-none text-xl font-bold">
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-[10px] font-black text-slate-400 uppercase mb-2">Return %</label>
-                            <input type="number" id="s-rate" value="12" oninput="calcSIP()" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-slate-900 outline-none text-xl font-bold">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-black text-slate-400 uppercase mb-2">Years</label>
-                            <input type="number" id="s-years" value="10" oninput="calcSIP()" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-slate-900 outline-none text-xl font-bold">
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-slate-900 rounded-3xl p-8 text-white flex flex-col justify-center text-center">
-                    <p class="text-slate-400 text-[10px] font-bold uppercase mb-2">Future Wealth</p>
-                    <p id="s-result" class="text-5xl font-black">$116,169</p>
-                    <p class="text-slate-500 text-[10px] mt-6 font-bold uppercase tracking-widest">Total Invested: <span id="s-invested" class="text-white">$60,000</span></p>
-                </div>
-            </div>
-        </div>
-
-        <!-- TOOL 4: AGE -->
-        <div id="age" class="tab-content bg-white rounded-3xl shadow-xl border border-slate-100 p-6 sm:p-10 text-center">
-            <h3 class="text-2xl font-bold mb-8">Age Finder</h3>
-            <div class="max-w-sm mx-auto space-y-6">
+        <!-- LOAN EMI -->
+        <section id="pane-loan" class="tab-content show bg-white rounded-3xl p-6 shadow-xl border border-slate-100">
+            <h2 class="text-xl font-extrabold mb-6">Loan EMI Calculator</h2>
+            <div class="space-y-4 mb-8">
                 <div>
-                    <label class="block text-[10px] font-black text-slate-400 uppercase mb-2">Date of Birth</label>
-                    <input type="date" id="a-date" oninput="calcAge()" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-slate-900 outline-none text-xl font-bold">
+                    <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Principal Amount ($)</label>
+                    <input type="number" id="l-amt" value="50000" oninput="runLoan()" class="w-full p-4 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none font-bold">
                 </div>
-                <div id="a-result-box" class="hidden p-8 bg-slate-50 rounded-3xl border-2 border-slate-100">
-                    <p class="text-slate-400 text-[10px] font-bold uppercase mb-2">Calculated Age</p>
-                    <p id="a-result" class="text-2xl font-black"></p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Rate (%)</label>
+                        <input type="number" id="l-int" value="7.5" oninput="runLoan()" class="w-full p-4 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none font-bold">
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Years</label>
+                        <input type="number" id="l-dur" value="5" oninput="runLoan()" class="w-full p-4 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none font-bold">
+                    </div>
                 </div>
             </div>
+            <div class="bg-slate-900 rounded-2xl p-6 text-center text-white">
+                <p class="text-[10px] font-bold text-slate-400 uppercase mb-1">Monthly EMI</p>
+                <div id="l-emi" class="text-4xl font-black">$1,001.90</div>
+                <div class="mt-4 pt-4 border-t border-slate-800 text-[10px] font-bold text-slate-500 uppercase">
+                    Total Interest: <span id="l-tot" class="text-white ml-1">$10,114</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- BMI HEALTH -->
+        <section id="pane-bmi" class="tab-content bg-white rounded-3xl p-6 shadow-xl border border-slate-100">
+            <h2 class="text-xl font-extrabold mb-6">BMI Health Analyzer</h2>
+            <div class="space-y-4 mb-8">
+                <div>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Weight (kg)</label>
+                    <input type="number" id="b-w" value="70" oninput="runBMI()" class="w-full p-4 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none font-bold">
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Height (cm)</label>
+                    <input type="number" id="b-h" value="175" oninput="runBMI()" class="w-full p-4 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none font-bold">
+                </div>
+            </div>
+            <div id="b-box" class="bg-slate-50 border-4 border-slate-900 rounded-2xl p-6 text-center">
+                <p class="text-slate-400 text-[10px] font-bold uppercase mb-1">BMI Score</p>
+                <div id="b-res" class="text-5xl font-black">22.9</div>
+                <div id="b-cat" class="mt-2 font-bold text-xs uppercase tracking-widest">Normal</div>
+            </div>
+        </section>
+
+        <!-- SIP WEALTH -->
+        <section id="pane-sip" class="tab-content bg-white rounded-3xl p-6 shadow-xl border border-slate-100">
+            <h2 class="text-xl font-extrabold mb-6">SIP Investment Planner</h2>
+            <div class="space-y-4 mb-8">
+                <div>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Monthly SIP ($)</label>
+                    <input type="number" id="s-amt" value="500" oninput="runSIP()" class="w-full p-4 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none font-bold">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Return (%)</label>
+                        <input type="number" id="s-ret" value="12" oninput="runSIP()" class="w-full p-4 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none font-bold">
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Years</label>
+                        <input type="number" id="s-yrs" value="10" oninput="runSIP()" class="w-full p-4 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none font-bold">
+                    </div>
+                </div>
+            </div>
+            <div class="bg-slate-900 rounded-2xl p-6 text-center text-white">
+                <p class="text-[10px] font-bold text-slate-400 uppercase mb-1">Maturity Wealth</p>
+                <div id="s-res" class="text-4xl font-black">$116,169</div>
+                <div class="mt-4 pt-4 border-t border-slate-800 text-[10px] font-bold text-slate-500 uppercase">
+                    Invested: <span id="s-inv" class="text-white ml-1">$60,000</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- AGE FINDER -->
+        <section id="pane-age" class="tab-content bg-white rounded-3xl p-6 shadow-xl border border-slate-100 text-center">
+            <h2 class="text-xl font-extrabold mb-6">Age Finder</h2>
+            <div class="max-w-xs mx-auto mb-8">
+                <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Date of Birth</label>
+                <input type="date" id="a-dob" oninput="runAge()" class="w-full p-4 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none font-bold text-center">
+            </div>
+            <div id="a-box" class="hidden bg-slate-50 rounded-2xl p-6 border-2 border-slate-100">
+                <p class="text-slate-400 text-[10px] font-bold uppercase mb-1">Your Age</p>
+                <div id="a-res" class="text-2xl font-black">--</div>
+            </div>
+        </section>
+
+        <!-- Bottom Ad -->
+        <div class="bg-slate-100 border-2 border-dashed border-slate-200 h-20 rounded-2xl flex items-center justify-center text-[10px] font-bold text-slate-400 uppercase mt-8">
+            AdSense Bottom Banner
         </div>
 
-        <!-- Bottom Banner Placeholder -->
-        <div class="bg-slate-100 border-2 border-dashed border-slate-200 h-24 mt-12 rounded-xl flex items-center justify-center text-slate-400 text-[10px] font-bold uppercase tracking-widest">
-            AdSense Bottom Placement
-        </div>
-
-        <!-- SYSTEM STATUS CHECK (For Debugging) -->
-        <div id="debug-status" class="mt-20 p-4 border rounded-lg text-center text-[10px] font-mono text-slate-400">
-            System Status: <span class="text-red-500">Connecting...</span>
+        <!-- VERIFICATION STATUS -->
+        <div id="v-status" class="mt-12 p-3 text-center text-[8px] font-mono text-slate-300 uppercase tracking-tighter">
+            Engine Offline
         </div>
     </main>
 
-    <footer class="bg-white border-t py-12 text-center">
-        <p class="text-slate-900 font-black text-xl mb-2">CalcForge</p>
-        <p class="text-slate-400 text-[10px] uppercase font-bold tracking-widest">© 2025 Precision Utility Calculator Suite</p>
-    </footer>
-
     <script>
-        // 0. Update System Status
-        function updateStatus() {
-            const statusBox = document.getElementById('debug-status');
-            if(statusBox) {
-                statusBox.innerHTML = 'System Status: <span class="text-green-500 font-bold underline">JavaScript Connected & Active</span>';
-            }
-        }
-
-        // 1. Tab System
-        function openTab(evt, tabName) {
-            let i, content, links;
-            content = document.getElementsByClassName("tab-content");
-            for (i = 0; i < content.length; i++) {
-                content[i].classList.remove("active");
-            }
-            links = document.getElementsByClassName("tab-link");
-            for (i = 0; i < links.length; i++) {
-                links[i].classList.remove("active-tab");
-            }
-            document.getElementById(tabName).classList.add("active");
-            evt.currentTarget.classList.add("active-tab");
-        }
-
-        // 2. Loan Logic
-        function calcLoan() {
-            const p = parseFloat(document.getElementById('l-amount').value) || 0;
-            const r = (parseFloat(document.getElementById('l-rate').value) || 0) / 12 / 100;
-            const n = (parseFloat(document.getElementById('l-years').value) || 0) * 12;
+        // CORE NAVIGATION
+        function switchTab(id) {
+            // 1. Hide all panes
+            const panes = document.querySelectorAll('.tab-content');
+            panes.forEach(p => p.classList.remove('show'));
             
+            // 2. Deactivate all buttons
+            const btns = document.querySelectorAll('.tab-btn');
+            btns.forEach(b => {
+                b.classList.remove('active');
+                b.classList.add('text-slate-500');
+            });
+
+            // 3. Show selected
+            document.getElementById('pane-' + id).classList.add('show');
+            const activeBtn = document.getElementById('btn-' + id);
+            activeBtn.classList.add('active');
+            activeBtn.classList.remove('text-slate-500');
+        }
+
+        // LOAN LOGIC
+        function runLoan() {
+            const p = parseFloat(document.getElementById('l-amt').value) || 0;
+            const r = (parseFloat(document.getElementById('l-int').value) || 0) / 12 / 100;
+            const n = (parseFloat(document.getElementById('l-dur').value) || 0) * 12;
             if (p > 0 && r > 0 && n > 0) {
                 const emi = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-                document.getElementById('l-result').innerText = "$" + emi.toLocaleString(undefined, {maximumFractionDigits: 2});
-                document.getElementById('l-interest').innerText = "$" + Math.round((emi * n) - p).toLocaleString();
+                document.getElementById('l-emi').innerText = "$" + emi.toLocaleString(undefined, {maximumFractionDigits: 2});
+                document.getElementById('l-tot').innerText = "$" + Math.round((emi * n) - p).toLocaleString();
             }
         }
 
-        // 3. BMI Logic
-        function calcBMI() {
-            const w = parseFloat(document.getElementById('b-weight').value) || 0;
-            const h = (parseFloat(document.getElementById('b-height').value) || 0) / 100;
-            
+        // BMI LOGIC
+        function runBMI() {
+            const w = parseFloat(document.getElementById('b-w').value) || 0;
+            const h = (parseFloat(document.getElementById('b-h').value) || 0) / 100;
             if (w > 0 && h > 0) {
                 const bmi = (w / (h * h)).toFixed(1);
-                document.getElementById('b-result').innerText = bmi;
-                let status = "Normal Weight";
-                let bg = "bg-white";
-                if(bmi < 18.5) { status = "Underweight"; bg = "bg-yellow-50"; }
-                else if(bmi >= 25 && bmi < 29.9) { status = "Overweight"; bg = "bg-orange-50"; }
-                else if(bmi >= 30) { status = "Obese"; bg = "bg-red-50"; }
-                document.getElementById('b-status').innerText = status;
-                document.getElementById('b-card').className = bg + " border-4 border-slate-900 rounded-3xl p-8 flex flex-col justify-center text-center transition-all";
+                document.getElementById('b-res').innerText = bmi;
+                let cat = "Normal";
+                let col = "border-slate-900";
+                if(bmi < 18.5) { cat = "Underweight"; col = "border-yellow-400"; }
+                else if(bmi >= 25 && bmi < 29.9) { cat = "Overweight"; col = "border-orange-400"; }
+                else if(bmi >= 30) { cat = "Obese"; col = "border-red-500"; }
+                document.getElementById('b-cat').innerText = cat;
+                document.getElementById('b-box').style.borderColor = (bmi >= 18.5 && bmi < 25) ? '#0f172a' : '';
+                document.getElementById('b-box').className = `bg-slate-50 border-4 rounded-2xl p-6 text-center ${col}`;
             }
         }
 
-        // 4. SIP Logic
-        function calcSIP() {
-            const m = parseFloat(document.getElementById('s-amount').value) || 0;
-            const r = (parseFloat(document.getElementById('s-rate').value) || 0) / 12 / 100;
-            const n = (parseFloat(document.getElementById('s-years').value) || 0) * 12;
-
+        // SIP LOGIC
+        function runSIP() {
+            const m = parseFloat(document.getElementById('s-amt').value) || 0;
+            const r = (parseFloat(document.getElementById('s-ret').value) || 0) / 12 / 100;
+            const n = (parseFloat(document.getElementById('s-yrs').value) || 0) * 12;
             if (m > 0 && r > 0 && n > 0) {
                 const total = m * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
-                document.getElementById('s-result').innerText = "$" + Math.round(total).toLocaleString();
-                document.getElementById('s-invested').innerText = "$" + (m * n).toLocaleString();
+                document.getElementById('s-res').innerText = "$" + Math.round(total).toLocaleString();
+                document.getElementById('s-inv').innerText = "$" + (m * n).toLocaleString();
             }
         }
 
-        // 5. Age Logic
-        function calcAge() {
-            const dobVal = document.getElementById('a-date').value;
-            if(!dobVal) return;
-            const dob = new Date(dobVal);
+        // AGE LOGIC
+        function runAge() {
+            const val = document.getElementById('a-dob').value;
+            if(!val) return;
+            const birth = new Date(val);
             const now = new Date();
-            let years = now.getFullYear() - dob.getFullYear();
-            let months = now.getMonth() - dob.getMonth();
-            if (months < 0 || (months === 0 && now.getDate() < dob.getDate())) {
-                years--;
+            let yrs = now.getFullYear() - birth.getFullYear();
+            if (now.getMonth() < birth.getMonth() || (now.getMonth() === birth.getMonth() && now.getDate() < birth.getDate())) {
+                yrs--;
             }
-            document.getElementById('a-result-box').classList.remove('hidden');
-            document.getElementById('a-result').innerText = years + " Years Old";
+            document.getElementById('a-box').classList.remove('hidden');
+            document.getElementById('a-res').innerText = yrs + " Years Old";
         }
-        
-        // Initial Startup
+
+        // STARTUP
         window.onload = function() {
-            updateStatus();
-            calcLoan();
-            calcBMI();
-            calcSIP();
+            document.getElementById('v-status').innerHTML = "Engine Connected • " + new Date().toLocaleTimeString();
+            runLoan();
+            runBMI();
+            runSIP();
         };
     </script>
 </body>
