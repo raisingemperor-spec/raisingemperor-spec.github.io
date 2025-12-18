@@ -3,208 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CalcForge - Free Financial & Health Calculation Suite</title>
+    <title>CalcForge - Free Ultimate Utility & Finance Portal</title>
+    
+    <!-- 🛑 ADSENSE CODE: PASTE YOUR SCRIPT BELOW THIS LINE 🛑 -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4813365942531906"
      crossorigin="anonymous"></script>
-    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; scroll-behavior: smooth; }
         .tab-content { display: none; }
-        .tab-content.show { display: block; animation: fadeIn 0.3s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .tab-btn.active { background-color: #0f172a; color: white; border-color: #0f172a; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .active-tab { background-color: #0f172a !important; color: white !important; border-color: #0f172a !important; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
+        .card-gradient { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
     </style>
 </head>
 <body class="text-slate-900">
 
-    <nav class="bg-white border-b py-4 px-6 sticky top-0 z-50">
-        <div class="max-w-5xl mx-auto flex justify-between items-center">
+    <!-- Header / Navigation -->
+    <nav class="bg-white border-b py-4 px-6 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-2">
-                <div class="bg-slate-900 p-1.5 rounded-lg">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                <div class="bg-slate-900 p-2 rounded-xl">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
                 </div>
-                <span class="text-xl font-extrabold tracking-tighter">CalcForge</span>
+                <span class="text-2xl font-extrabold tracking-tighter text-slate-900">CalcForge</span>
             </div>
-            <div class="flex space-x-4 text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                <a href="privacy.html">Privacy</a>
-                <a href="contact.html">Contact</a>
+            <div class="hidden md:flex space-x-8 text-xs font-bold uppercase tracking-widest text-slate-500">
+                <a href="#tools" class="hover:text-slate-900 transition">Calculators</a>
+                <a href="#learn" class="hover:text-slate-900 transition">Learning Hub</a>
+                <a href="privacy.html" class="hover:text-slate-900 transition">Privacy</a>
             </div>
+            <a href="#tools" class="bg-slate-900 text-white px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest md:hidden">Tools</a>
         </div>
     </nav>
 
-    <main class="max-w-4xl mx-auto px-4 py-8">
-        <header class="text-center mb-10">
-            <h1 class="text-3xl font-black mb-2 uppercase">Precision Utility Suite</h1>
-            <p class="text-slate-400 text-sm">Empowering your financial and health decisions with instant logic.</p>
+    <main class="max-w-6xl mx-auto px-4 py-12">
+        
+        <!-- Hero Section -->
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight tracking-tight">The Global Forge for <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-slate-900">Precision Utilities.</span></h1>
+            <p class="text-slate-500 text-lg max-w-2xl mx-auto mb-8">Empowering millions with 100% private, server-grade calculations for wealth, health, and daily productivity.</p>
+            <div class="flex justify-center space-x-4">
+                <div class="flex items-center space-x-1 text-[10px] font-bold text-green-600 uppercase border border-green-200 bg-green-50 px-3 py-1 rounded-full">
+                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    <span>100% Private</span>
+                </div>
+                <div class="flex items-center space-x-1 text-[10px] font-bold text-blue-600 uppercase border border-blue-200 bg-blue-50 px-3 py-1 rounded-full">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <span>Secure Math</span>
+                </div>
+            </div>
         </header>
 
-        <!-- Tool Selection -->
-        <div class="flex space-x-2 overflow-x-auto no-scrollbar pb-4 mb-6">
-            <button id="btn-loan" onclick="switchTab('loan')" class="tab-btn active px-6 py-3 rounded-xl border-2 font-bold text-xs whitespace-nowrap transition-all">LOAN EMI</button>
-            <button id="btn-bmi" onclick="switchTab('bmi')" class="tab-btn px-6 py-3 rounded-xl border-2 font-bold text-xs whitespace-nowrap transition-all text-slate-500">BMI HEALTH</button>
-            <button id="btn-sip" onclick="switchTab('sip')" class="tab-btn px-6 py-3 rounded-xl border-2 font-bold text-xs whitespace-nowrap transition-all text-slate-500">SIP WEALTH</button>
-            <button id="btn-age" onclick="switchTab('age')" class="tab-btn px-6 py-3 rounded-xl border-2 font-bold text-xs whitespace-nowrap transition-all text-slate-500">AGE FINDER</button>
+        <!-- Top Ad Placeholder -->
+        <div class="bg-slate-100 border-2 border-dashed border-slate-200 h-28 mb-16 rounded-3xl flex items-center justify-center text-slate-400 text-xs font-bold uppercase tracking-widest">
+            AdSense Responsive Display Ad
         </div>
 
-        <!-- TOOL PANES -->
-        <div class="mb-20">
-            <section id="pane-loan" class="tab-content show bg-white rounded-3xl p-6 shadow-xl border border-slate-100">
-                <h2 class="text-xl font-extrabold mb-6">Loan EMI Calculator</h2>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="space-y-4">
-                        <input type="number" id="l-amt" value="50000" oninput="runLoan()" class="w-full p-4 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none font-bold" placeholder="Amount ($)">
-                        <div class="grid grid-cols-2 gap-4">
-                            <input type="number" id="l-int" value="7.5" oninput="runLoan()" class="w-full p-4 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none font-bold" placeholder="Rate (%)">
-                            <input type="number" id="l-dur" value="5" oninput="runLoan()" class="w-full p-4 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none font-bold" placeholder="Years">
+        <!-- TOOLS PORTAL -->
+        <div id="tools" class="mb-24">
+            <h2 class="text-2xl font-black mb-8 flex items-center">
+                <span class="bg-slate-900 text-white w-8 h-8 rounded-lg flex items-center justify-center mr-3 text-sm">1</span>
+                Select Your Utility
+            </h2>
+            
+            <!-- Tool Tabs -->
+            <div class="flex space-x-2 overflow-x-auto no-scrollbar pb-4 mb-8">
+                <button onclick="tab('loan')" id="btn-loan" class="tool-tab active-tab px-6 py-4 rounded-2xl border-2 font-bold text-xs whitespace-nowrap transition-all shadow-sm">LOAN EMI</button>
+                <button onclick="tab('bmi')" id="btn-bmi" class="tool-tab px-6 py-4 rounded-2xl border-2 font-bold text-xs whitespace-nowrap transition-all text-slate-500 bg-white">BMI HEALTH</button>
+                <button onclick="tab('sip')" id="btn-sip" class="tool-tab px-6 py-4 rounded-2xl border-2 font-bold text-xs whitespace-nowrap transition-all text-slate-500 bg-white">SIP WEALTH</button>
+                <button onclick="tab('disc')" id="btn-disc" class="tool-tab px-6 py-4 rounded-2xl border-2 font-bold text-xs whitespace-nowrap transition-all text-slate-500 bg-white">DISCOUNT %</button>
+                <button onclick="tab('fuel')" id="btn-fuel" class="tool-tab px-6 py-4 rounded-2xl border-2 font-bold text-xs whitespace-nowrap transition-all text-slate-500 bg-white">FUEL COST</button>
+                <button onclick="tab('tip')" id="btn-tip" class="tool-tab px-6 py-4 rounded-2xl border-2 font-bold text-xs whitespace-nowrap transition-all text-slate-500 bg-white">TIP SPLIT</button>
+                <button onclick="tab('age')" id="btn-age" class="tool-tab px-6 py-4 rounded-2xl border-2 font-bold text-xs whitespace-nowrap transition-all text-slate-500 bg-white">AGE FINDER</button>
+                <button onclick="tab('comp')" id="btn-comp" class="tool-tab px-6 py-4 rounded-2xl border-2 font-bold text-xs whitespace-nowrap transition-all text-slate-500 bg-white">COMPOUNDING</button>
+            </div>
+
+            <!-- TOOL PANES -->
+            <div class="bg-white rounded-[2.5rem] p-6 md:p-12 shadow-2xl border border-slate-100 min-h-[450px]">
+                
+                <!-- Loan EMI -->
+                <div id="loan" class="tab-content active">
+                    <h3 class="text-2xl font-black mb-8">Loan EMI Calculator</h3>
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div class="space-y-6">
+                            <div>
+                                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Principal Amount ($)</label>
+                                <input type="number" id="l-amt" value="50000" oninput="runLoan()" class="w-full p-5 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none text-xl font-bold">
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Rate (%)</label>
+                                    <input type="number" id="l-int" value="8.5" step="0.1" oninput="runLoan()" class="w-full p-5 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none text-xl font-bold">
+                                </div>
+                                <div>
+                                    <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Duration (Yrs)</label>
+                                    <input type="number" id="l-dur" value="10" oninput="runLoan()" class="w-full p-5 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none text-xl font-bold">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-gradient rounded-[2rem] p-10 text-white flex flex-col justify-center items-center text-center shadow-2xl">
+                            <p class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-2">Monthly Installment</p>
+                            <div id="l-res" class="text-5xl font-black">$620.35</div>
+                            <div class="w-full mt-8 pt-8 border-t border-slate-700 flex justify-between text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                                <span>Total Interest:</span>
+                                <span id="l-tot" class="text-white">$24,442</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="bg-slate-900 rounded-2xl p-6 text-center text-white">
-                        <p class="text-[10px] font-bold text-slate-400 uppercase mb-1">Monthly EMI</p>
-                        <div id="l-emi" class="text-4xl font-black">$1,001.90</div>
-                        <p id="l-tot" class="text-[10px] text-slate-500 mt-2 font-bold uppercase">Total Interest: $10,114</p>
-                    </div>
                 </div>
-            </section>
 
-            <section id="pane-bmi" class="tab-content bg-white rounded-3xl p-6 shadow-xl border border-slate-100">
-                <h2 class="text-xl font-extrabold mb-6 text-center">BMI Health Analyzer</h2>
-                <div class="max-w-md mx-auto space-y-4">
-                    <input type="number" id="b-w" value="70" oninput="runBMI()" class="w-full p-4 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none font-bold text-center" placeholder="Weight (kg)">
-                    <input type="number" id="b-h" value="175" oninput="runBMI()" class="w-full p-4 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none font-bold text-center" placeholder="Height (cm)">
-                    <div id="b-box" class="bg-slate-50 border-4 border-slate-900 rounded-2xl p-6 text-center transition-all">
-                        <div id="b-res" class="text-5xl font-black">22.9</div>
-                        <div id="b-cat" class="font-bold text-xs uppercase tracking-widest mt-1">Normal Weight</div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="pane-sip" class="tab-content bg-white rounded-3xl p-6 shadow-xl border border-slate-100">
-                <h2 class="text-xl font-extrabold mb-6">Investment (SIP) Planner</h2>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="space-y-4">
-                        <input type="number" id="s-amt" value="500" oninput="runSIP()" class="w-full p-4 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none font-bold" placeholder="Monthly SIP ($)">
-                        <div class="grid grid-cols-2 gap-4">
-                            <input type="number" id="s-ret" value="12" oninput="runSIP()" class="w-full p-4 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none font-bold" placeholder="Return (%)">
-                            <input type="number" id="s-yrs" value="10" oninput="runSIP()" class="w-full p-4 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none font-bold" placeholder="Years">
+                <!-- BMI -->
+                <div id="bmi" class="tab-content">
+                    <h3 class="text-2xl font-black mb-8">BMI Health Analyzer</h3>
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div class="space-y-6">
+                            <input type="number" id="b-w" value="70" oninput="runBMI()" class="w-full p-5 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none text-xl font-bold" placeholder="Weight (kg)">
+                            <input type="number" id="b-h" value="175" oninput="runBMI()" class="w-full p-5 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none text-xl font-bold" placeholder="Height (cm)">
+                        </div>
+                        <div id="b-card" class="bg-white border-4 border-slate-900 rounded-[2rem] p-10 flex flex-col justify-center items-center text-center">
+                            <p class="text-slate-400 text-[10px] font-bold uppercase mb-2">BMI Score</p>
+                            <div id="b-val" class="text-6xl font-black">22.9</div>
+                            <div id="b-cat" class="mt-4 bg-slate-900 text-white px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest">Normal Weight</div>
                         </div>
                     </div>
-                    <div class="bg-slate-900 rounded-2xl p-6 text-center text-white">
-                        <p class="text-[10px] font-bold text-slate-400 uppercase mb-1">Maturity Value</p>
-                        <div id="s-res" class="text-4xl font-black">$116,169</div>
-                        <p id="s-inv" class="text-[10px] text-slate-500 mt-2 font-bold uppercase">Invested: $60,000</p>
+                </div>
+
+                <!-- SIP -->
+                <div id="sip" class="tab-content">
+                    <h3 class="text-2xl font-black mb-8">SIP Wealth Planner</h3>
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div class="space-y-6">
+                            <input type="number" id="s-amt" value="500" oninput="runSIP()" class="w-full p-5 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none text-xl font-bold" placeholder="Monthly SIP ($)">
+                            <div class="grid grid-cols-2 gap-4">
+                                <input type="number" id="s-ret" value="12" oninput="runSIP()" class="w-full p-5 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none text-xl font-bold" placeholder="Return (%)">
+                                <input type="number" id="s-yrs" value="10" oninput="runSIP()" class="w-full p-5 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none text-xl font-bold" placeholder="Years">
+                            </div>
+                        </div>
+                        <div class="card-gradient rounded-[2rem] p-10 text-white flex flex-col justify-center items-center text-center">
+                            <p class="text-slate-400 text-[10px] font-bold uppercase mb-2">Maturity Wealth</p>
+                            <div id="s-res" class="text-5xl font-black">$116,169</div>
+                            <div class="w-full mt-6 text-[10px] text-slate-500 uppercase font-bold">Invested: <span id="s-inv" class="text-white">$60,000</span></div>
+                        </div>
                     </div>
                 </div>
-            </section>
 
-            <section id="pane-age" class="tab-content bg-white rounded-3xl p-6 shadow-xl border border-slate-100 text-center">
-                <h2 class="text-xl font-extrabold mb-6">Age Finder</h2>
-                <div class="max-w-xs mx-auto mb-8">
-                    <input type="date" id="a-dob" oninput="runAge()" class="w-full p-4 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none font-bold text-center">
+                <!-- Discount -->
+                <div id="disc" class="tab-content">
+                    <h3 class="text-2xl font-black mb-8 text-center">Discount Calculator</h3>
+                    <div class="max-w-md mx-auto space-y-6">
+                        <input type="number" id="d-price" value="100" oninput="runDisc()" class="w-full p-5 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none text-xl font-bold text-center" placeholder="Original Price ($)">
+                        <input type="number" id="d-pct" value="20" oninput="runDisc()" class="w-full p-5 bg-slate-50 rounded-2xl border-2 border-transparent focus:border-slate-900 outline-none text-xl font-bold text-center" placeholder="Discount %">
+                        <div class="bg-slate-50 rounded-3xl p-8 border-2 border-slate-100 flex justify-around text-center">
+                            <div>
+                                <p class="text-[10px] font-black text-slate-400 uppercase mb-1">You Save</p>
+                                <p id="d-save" class="text-2xl font-black text-green-600">$20</p>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-black text-slate-400 uppercase mb-1">Final Price</p>
+                                <p id="d-final" class="text-2xl font-black text-slate-900">$80</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div id="a-box" class="hidden bg-slate-900 rounded-2xl p-6 text-white">
-                    <p id="a-res" class="text-2xl font-black">--</p>
+
+                <!-- Fuel -->
+                <div id="fuel" class="tab-content">
+                    <h3 class="text-2xl font-black mb-8">Fuel Cost Calculator</h3>
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div class="space-y-4">
+                            <input type="number" id="f-dist" value="500" oninput="runFuel()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold" placeholder="Trip Distance (km)">
+                            <input type="number" id="f-eff" value="15" oninput="runFuel()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold" placeholder="Efficiency (km/L)">
+                            <input type="number" id="f-price" value="1.5" oninput="runFuel()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold" placeholder="Fuel Price per Liter">
+                        </div>
+                        <div class="bg-blue-50 rounded-[2rem] p-10 border-2 border-blue-100 flex flex-col justify-center items-center text-center">
+                            <p class="text-blue-600 text-[10px] font-black uppercase mb-1">Total Trip Cost</p>
+                            <div id="f-res" class="text-5xl font-black text-slate-900">$50.00</div>
+                        </div>
+                    </div>
                 </div>
-            </section>
+
+                <!-- Tip -->
+                <div id="tip" class="tab-content">
+                    <h3 class="text-2xl font-black mb-8 text-center">Tip & Split Calculator</h3>
+                    <div class="max-w-md mx-auto space-y-6">
+                        <input type="number" id="t-bill" value="120" oninput="runTip()" class="w-full p-5 bg-slate-50 rounded-2xl border font-bold text-center" placeholder="Total Bill ($)">
+                        <div class="grid grid-cols-2 gap-4">
+                            <input type="number" id="t-pct" value="15" oninput="runTip()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold text-center" placeholder="Tip %">
+                            <input type="number" id="t-ppl" value="4" oninput="runTip()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold text-center" placeholder="Split (People)">
+                        </div>
+                        <div class="card-gradient text-white rounded-[2rem] p-8 text-center">
+                            <p class="text-slate-400 text-[10px] font-black uppercase mb-1">Each Person Pays</p>
+                            <div id="t-res" class="text-4xl font-black">$34.50</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Age -->
+                <div id="age" class="tab-content">
+                    <h3 class="text-2xl font-black mb-8 text-center">Precision Age Finder</h3>
+                    <div class="max-w-sm mx-auto space-y-8">
+                        <input type="date" id="a-dob" oninput="runAge()" class="w-full p-6 bg-slate-50 rounded-2xl border font-bold text-center text-xl">
+                        <div id="a-box" class="hidden bg-slate-900 rounded-[2rem] p-10 text-white text-center animate-bounce">
+                            <p class="text-slate-400 text-[10px] font-black uppercase mb-2">Calculated Age</p>
+                            <div id="a-res" class="text-3xl font-black">--</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compound -->
+                <div id="comp" class="tab-content">
+                    <h3 class="text-2xl font-black mb-8">Compound Interest (Lump Sum)</h3>
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div class="space-y-4">
+                            <input type="number" id="c-amt" value="10000" oninput="runComp()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold" placeholder="Initial Deposit ($)">
+                            <input type="number" id="c-rate" value="7" oninput="runComp()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold" placeholder="Interest Rate %">
+                            <input type="number" id="c-yrs" value="10" oninput="runComp()" class="w-full p-4 bg-slate-50 rounded-xl border font-bold" placeholder="Years">
+                        </div>
+                        <div class="bg-indigo-600 rounded-[2rem] p-10 text-white flex flex-col justify-center items-center text-center">
+                            <p class="text-indigo-200 text-[10px] font-black uppercase mb-1">Final Balance</p>
+                            <div id="c-res" class="text-4xl font-black">$19,671</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
-        <!-- 🚀 MASSIVE CONTENT SECTION FOR ADSENSE APPROVAL 🚀 -->
-        <hr class="border-slate-200 mb-16">
+        <!-- 🚀 MEGA CONTENT HUB FOR ADSENSE APPROVAL 🚀 -->
+        <hr class="border-slate-200 mb-20">
 
-        <article class="prose prose-slate max-w-none">
-            <h2 class="text-3xl font-black mb-6">Mastering Your Finances and Health: A Complete Guide</h2>
-            <p class="text-slate-600 mb-8 leading-relaxed">In today's fast-paced world, precision is key. Whether you are planning your dream home, calculating your fitness progress, or projecting your retirement wealth, having the right data is essential. CalcForge was built to provide professional-grade mathematical tools that work instantly, privately, and for free.</p>
+        <section id="learn" class="grid md:grid-cols-3 gap-12 mb-24">
+            <div class="md:col-span-2 prose prose-slate max-w-none">
+                <h2 class="text-4xl font-black mb-10 tracking-tight">The Ultimate Guide to Utility Math & Personal Success</h2>
+                
+                <h3 class="text-xl font-extrabold mt-12 mb-4">Why Mathematical Precision Matters</h3>
+                <p class="text-slate-600 leading-relaxed mb-6">In an era of information overload, the ability to distill complex scenarios into simple, actionable numbers is a superpower. Whether you are calculating the "cost of money" via a mortgage or tracking your physiological progress through BMI, the numbers never lie. CalcForge was engineered to remove the guesswork from your daily decisions.</p>
 
-            <h3 class="text-xl font-extrabold mt-12 mb-4">1. The Science of Debt Management</h3>
-            <p class="text-slate-600 mb-6">When you take a loan, you aren't just paying back the principal; you are paying for the "cost of money." Our <strong>Loan EMI Calculator</strong> uses the standard reducing balance method to show you exactly how much interest you will pay over the life of your loan. A common strategy for financial freedom is to keep your total monthly debt payments below 36% of your gross monthly income.</p>
+                <h3 class="text-xl font-extrabold mt-12 mb-4">Financial Literacy: The Loan Factor</h3>
+                <p class="text-slate-600 leading-relaxed mb-6">Loans are not just about the monthly payment; they are about the total amortized cost. By using our **Loan EMI Tool**, you can visualize the impact of interest rates. For instance, a 1% difference in interest on a $200,000 mortgage can save you over $40,000 over 30 years. Financial freedom begins with understanding these margins.</p>
 
-            <h3 class="text-xl font-extrabold mt-12 mb-4">2. Building Wealth through Compound Interest</h3>
-            <p class="text-slate-600 mb-6">The secret to wealth isn't just a high salary—it's time and consistency. Using a <strong>Systematic Investment Plan (SIP)</strong> allows you to benefit from "Rupee Cost Averaging" and the power of compound interest. Even a small monthly contribution of $500, growing at an average market rate of 12%, can transform into a significant fortune over 20 years. Our tool visualizes this growth, helping you stay motivated on your path to financial independence.</p>
-
-            <h3 class="text-xl font-extrabold mt-12 mb-4">3. Monitoring Body Mass Index (BMI) for Longevity</h3>
-            <p class="text-slate-600 mb-6">Physical health is your most valuable asset. The <strong>Body Mass Index (BMI)</strong> is a widely accepted screening tool used by medical professionals to determine if a person is in a healthy weight range for their height. While it doesn't measure body fat directly, it correlates strongly with metabolic and disease risks. Maintaining a "Normal" BMI (between 18.5 and 24.9) is associated with reduced risks of heart disease, diabetes, and other chronic conditions.</p>
-
-            <h3 class="text-xl font-extrabold mt-12 mb-4">4. Strategic Financial Milestones</h3>
-            <p class="text-slate-600 mb-6 font-bold uppercase tracking-widest text-xs italic">Expert Tip: Always aim to save at least 20% of your income toward investments and debt repayment.</p>
-            <p class="text-slate-600 mb-6">Your age plays a critical role in your risk tolerance. Generally, the younger you are, the more "aggressive" your investments can be. Use our <strong>Age Finder</strong> to calculate your exact age milestones and adjust your financial portfolio accordingly. As you age, shifting toward safer assets like bonds helps protect the wealth you have forged over the decades.</p>
-        </article>
-
-        <!-- Final Ad Slot -->
-        <div class="bg-slate-100 border-2 border-dashed border-slate-200 h-24 mt-16 rounded-xl flex items-center justify-center text-[10px] font-bold text-slate-400 uppercase">
-            AdSense Bottom Display Ad
-        </div>
-    </main>
-
-    <footer class="bg-slate-900 text-slate-500 py-16 text-center mt-20">
-        <div class="mb-4 text-white font-black text-2xl uppercase">CalcForge</div>
-        <p class="text-xs max-w-xs mx-auto mb-8 uppercase tracking-widest font-bold">The Forge of Precision Utility</p>
-        <div class="flex justify-center space-x-6 text-[10px] font-bold uppercase tracking-widest">
-            <a href="privacy.html" class="hover:text-white">Privacy</a>
-            <a href="contact.html" class="hover:text-white">Contact</a>
-        </div>
-    </footer>
-
-    <script>
-        function switchTab(id) {
-            document.querySelectorAll('.tab-content').forEach(p => p.classList.remove('show'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active', 'text-slate-900'));
-            document.getElementById('pane-' + id).classList.add('show');
-            document.getElementById('btn-' + id).classList.add('active', 'text-slate-900');
-        }
-
-        function runLoan() {
-            const p = parseFloat(document.getElementById('l-amt').value) || 0;
-            const r = (parseFloat(document.getElementById('l-int').value) || 0) / 12 / 100;
-            const n = (parseFloat(document.getElementById('l-dur').value) || 0) * 12;
-            if (p > 0 && r > 0 && n > 0) {
-                const emi = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-                document.getElementById('l-emi').innerText = "$" + emi.toLocaleString(undefined, {maximumFractionDigits: 2});
-                document.getElementById('l-tot').innerText = "Total Interest: $" + Math.round((emi * n) - p).toLocaleString();
-            }
-        }
-
-        function runBMI() {
-            const w = parseFloat(document.getElementById('b-w').value) || 0;
-            const h = (parseFloat(document.getElementById('b-h').value) || 0) / 100;
-            if (w > 0 && h > 0) {
-                const bmi = (w / (h * h)).toFixed(1);
-                document.getElementById('b-res').innerText = bmi;
-                let cat = "Normal Weight", col = "border-slate-900";
-                if(bmi < 18.5) { cat = "Underweight"; col = "border-yellow-400"; }
-                else if(bmi >= 25 && bmi < 29.9) { cat = "Overweight"; col = "border-orange-400"; }
-                else if(bmi >= 30) { cat = "Obese"; col = "border-red-500"; }
-                document.getElementById('b-cat').innerText = cat;
-                document.getElementById('b-box').className = `bg-slate-50 border-4 rounded-2xl p-6 text-center ${col}`;
-            }
-        }
-
-        function runSIP() {
-            const m = parseFloat(document.getElementById('s-amt').value) || 0;
-            const r = (parseFloat(document.getElementById('s-ret').value) || 0) / 12 / 100;
-            const n = (parseFloat(document.getElementById('s-yrs').value) || 0) * 12;
-            if (m > 0 && r > 0 && n > 0) {
-                const total = m * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
-                document.getElementById('s-res').innerText = "$" + Math.round(total).toLocaleString();
-                document.getElementById('s-inv').innerText = "Invested: $" + (m * n).toLocaleString();
-            }
-        }
-
-        function runAge() {
-            const val = document.getElementById('a-dob').value;
-            if(!val) return;
-            const birth = new Date(val);
-            const now = new Date();
-            let yrs = now.getFullYear() - birth.getFullYear();
-            if (now.getMonth() < birth.getMonth() || (now.getMonth() === birth.getMonth() && now.getDate() < birth.getDate())) yrs--;
-            document.getElementById('a-box').classList.remove('hidden');
-            document.getElementById('a-res').innerText = yrs + " Years Old";
-        }
-
-        window.onload = () => { runLoan(); runBMI(); runSIP(); };
-    </script>
-</body>
-</html>
-
-    
+                <h3 class="text-xl font-extrabold mt-12 mb-4">Health as an Asset: The BMI Metric</h3>
+                <p class="text-slate-600 leading-relaxed mb-6">Body Mass Index (BMI) remains one of the most effective screening tools for metabolic health. While it does not measure body fat percentage directly, it provides a crucial statistical range for healthy weight management. Maintaini
