@@ -1,7 +1,7 @@
 CalcForge: Precision Utility Calculator Suite
 CalcForge is a high-performance, privacy-focused suite of utility calculators designed to provide instant results for financial planning and health tracking.
 🚀 Live Demo
-You can access the live tools here: https://raisingemperor-spec.github.io
+You can access the live tools here: https://raisingemperor-spec.github.io/-raisingemperor-spec-.github.io/
 🛠 Features
 This suite includes four essential tools built with mathematical precision:
  * Loan EMI Calculator: Calculate monthly repayments and total interest for mortgages or personal loans.
